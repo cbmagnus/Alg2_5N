@@ -82,7 +82,7 @@ public class Jogo {
 	
 	
 	public void avancar(int pos) {
-		
+		//se chegou na posição final ou mais ganhou
 		if ((pos + posicao) >= (tamanho_mapa - 1)) {
 			System.out.println("\nPARABÉNS VOCÊ GANHOU!!!");
 			System.exit(0);
@@ -264,7 +264,7 @@ public class Jogo {
 				}
 				break;
 
-			case 5: // mostra os mapas
+			case 5: // mostra os 2 mapas
 				System.out.println("mapa  = " + Arrays.toString(j.getMapa()));
 				System.out.println("carga = " + Arrays.toString(j.getCarga()));
 				break;
@@ -272,7 +272,7 @@ public class Jogo {
 			default:
 				System.out.println("\nOPÇÃO INVALIDA ESCOLHA UM DOS NUMERO INDICADOS ABAIXO");
 				break;
-
+				
 			}
 
 		} while (j.getOpcao() != 9);
