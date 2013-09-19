@@ -103,7 +103,12 @@ public class Jogo {
 	public void voltar(int pos) {
 		if (pos > tanque) {
 			System.out.println("\nVOCÊ PODE ANDAR NO MAXIMO   " + tanque + "   POSIÇÕES!\n");
-		} else {
+		}
+		if (posicao - pos < 0){
+			System.out.println("\nVOCÊ NÃO PODE VOLTAR ULTRAPASSOU O TAMANHO DO MAPA");
+		}
+		
+		else {
 			posicao -= pos;
 			tanque -= pos;
 			mapa[posicao] = tanque;
