@@ -3,24 +3,13 @@ package importado.professor.aula6;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class TestesTravessiaDeserto extends TravessiaDeserto{
 	
-	@BeforeClass
-	public static void setUpBeforeClass() {
-		System.out.println("antes classe");
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() {
-		System.out.println("depois classe");
-	}
 
 	@Before
 	public void setUp() {
