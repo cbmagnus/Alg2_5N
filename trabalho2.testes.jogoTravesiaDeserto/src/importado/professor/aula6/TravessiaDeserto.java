@@ -29,9 +29,6 @@ public class TravessiaDeserto {
 	public int getPos(){
 		return pos;
 	}
-	public java.util.Scanner getSc(){
-		return sc;
-	}
 		
 
 	public static void main(String[] args) {
