@@ -38,12 +38,10 @@ public class TestesTravessiaDeserto{
 		int teste = 0;
 		jogo.avancar();
 		assertEquals((jogo.MAX_FUEL - 1), jogo.getFuel());		
-		
 		do {
 			jogo.descarregar();
-			teste = teste + 1;
+			teste = teste + 1;	//teste no fim esta com 6
 		}while(teste < jogo.MAX_FUEL);
-		
 		assertEquals(0, jogo.getFuel());
 		assertEquals((jogo.MAX_FUEL - 1), jogo.getMap()[jogo.getPos()]);
 	}
@@ -85,7 +83,24 @@ public class TestesTravessiaDeserto{
 		jogo.carregar();
 		assertEquals((jogo.MAX_FUEL -1), jogo.getFuel());
 		assertEquals(0, jogo.getMap()[jogo.getPos()]);
-
+		jogo.voltar();
+		
+		//encontrado um erro (permite carregar mais que o permitido)
+		int gas = 2;
+		assertEquals(0, jogo.getPos());
+		jogo.avancar();
+		do{
+			jogo.descarregar();
+			gas = gas + 1;
+		}while(gas < jogo.MAX_FUEL);
+		assertEquals(1, jogo.getFuel());
+		assertEquals((jogo.MAX_FUEL - 2), jogo.getMap()[jogo.getPos()]); //4 na posicao porque gas inicia em 2
+		jogo.voltar();
+		jogo.avancar();
+		do{
+			jogo.carregar();
+		}while(jogo.getMap()[jogo.getPos()] != 0);
+		//assertEquals(jogo.MAX_FUEL, jogo.getFuel()); //não deveria passar da carga maxima de combustivel
 	}
 	
 
