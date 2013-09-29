@@ -154,6 +154,7 @@ public class TestesTravessiaDeserto{
 		assertEquals(jogo.translateCommand("carregar"), jogo.CARREGAR);
 		assertEquals(jogo.translateCommand("ajuda"), jogo.AJUDA);
 		assertEquals(jogo.translateCommand("avancar"), jogo.AVANCAR);
+		
 	}
 	
 
