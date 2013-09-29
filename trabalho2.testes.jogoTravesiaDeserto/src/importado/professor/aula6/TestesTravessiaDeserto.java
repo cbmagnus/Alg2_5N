@@ -1,5 +1,7 @@
 package importado.professor.aula6;
 
+import java.io.PrintWriter;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.junit.After;
@@ -28,6 +30,13 @@ public class TestesTravessiaDeserto{
 		jogo.avancar();
 		assertEquals(anterior_pos + 1, jogo.getPos());
 		assertEquals(anterior_fuel - 1,jogo.getFuel());
+		jogo.voltar();
+		assertEquals(0, jogo.getPos());
+		do{
+			jogo.avancar();
+		}while(jogo.getFuel() != 0);
+		jogo.avancar();
+		assertEquals(jogo.MAX_FUEL, jogo.getPos());
 	}
 	
 	
@@ -62,6 +71,20 @@ public class TestesTravessiaDeserto{
 		jogo.voltar();
 		assertEquals((anterior_pos - 1), jogo.getPos()); //1
 		assertEquals((anterior_fuel - 1),jogo.getFuel()); //3	
+		jogo.voltar();
+		
+		assertEquals(0, jogo.getPos());
+		assertEquals(jogo.MAX_FUEL, jogo.getFuel());
+		jogo.avancar();
+		jogo.avancar();
+		jogo.avancar();
+		jogo.avancar();
+		jogo.voltar();
+		jogo.voltar();
+		jogo.voltar();
+		jogo.voltar();
+		assertEquals(0, jogo.getFuel());
+		assertEquals(2, jogo.getPos());
 	}
 	
 	
@@ -101,6 +124,36 @@ public class TestesTravessiaDeserto{
 			jogo.carregar();
 		}while(jogo.getMap()[jogo.getPos()] != 0);
 		//assertEquals(jogo.MAX_FUEL, jogo.getFuel()); //não deveria passar da carga maxima de combustivel
+	}
+	
+	
+	@Test
+	public void testProcessCommand(){
+		assertEquals(0, jogo.getPos());
+		jogo.processCommand(0);	//avancar
+		assertEquals(1, jogo.getPos());
+		assertEquals(jogo.MAX_FUEL - 1, jogo.getFuel());
+		
+		jogo.processCommand(3);	//descarregar
+		assertEquals(jogo.MAX_FUEL - 2, jogo.getFuel());
+		
+		jogo.processCommand(2);	//carregar
+		assertEquals(jogo.MAX_FUEL - 1, jogo.getFuel());
+		
+		jogo.processCommand(1);	//voltar
+		assertEquals(0, jogo.getPos());
+		assertEquals(jogo.MAX_FUEL, jogo.getFuel());
+	}
+	
+	
+	@Test
+	public void testTranslateCommand(){
+		assertEquals(jogo.translateCommand("avancar"), jogo.AVANCAR);
+		assertEquals(jogo.translateCommand("voltar"), jogo.VOLTAR);
+		assertEquals(jogo.translateCommand("descarregar"), jogo.DESCARREGAR);
+		assertEquals(jogo.translateCommand("carregar"), jogo.CARREGAR);
+		assertEquals(jogo.translateCommand("ajuda"), jogo.AJUDA);
+		assertEquals(jogo.translateCommand("avancar"), jogo.AVANCAR);
 	}
 	
 
