@@ -161,7 +161,7 @@ public class TestesTravessiaDeserto{
 		do{
 			jogo.carregar();
 		}while(jogo.getMap()[jogo.getPos()] != 0);
-//descomentar		assertEquals(jogo.MAX_FUEL, jogo.getFuel()); //não deveria passar da carga maxima de combustivel
+		assertEquals(TravessiaDeserto.MAX_FUEL, jogo.getFuel()); //não deveria passar da carga maxima de combustivel
 	}
 	
 	
