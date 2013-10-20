@@ -28,6 +28,7 @@ public class AvaliadorRPN
 		return pilha.pop();
 	}
 
+	
 	private static double executaOperador(char op, double lhs, double rhs) throws InvalidOperator
 	{
 		switch (op) {
