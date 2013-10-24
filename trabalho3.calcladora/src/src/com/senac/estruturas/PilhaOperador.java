@@ -2,8 +2,9 @@ package src.com.senac.estruturas;
 
 public class PilhaOperador {
 
-	private double[] dados;
-	private int   topo;
+	private static double[] dados;
+	private static int topo;
+	
 	
 	public PilhaOperador (int tam)
 	{
@@ -19,7 +20,7 @@ public class PilhaOperador {
 		return dados[topo - 1]; 
 	}
 
-	public void push (double valor) throws PilhaCheia
+	public static void push (double valor) throws PilhaCheia
 	{
 		if (isFull())
 			throw new PilhaCheia();
@@ -37,7 +38,7 @@ public class PilhaOperador {
 		return dados[topo];
 	}
 	
-	private boolean isFull() {
+	private static boolean isFull() {
 		return topo == dados.length;
 	}
 
