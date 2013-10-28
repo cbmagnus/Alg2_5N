@@ -3,8 +3,11 @@ package src.com.senac.estruturas;
 public class PilhaOperador {
 
 	private static double[] dados;
-	private static int topo;
+	private static int topo = 0;
 	
+	public int getTopo(){
+		return topo;
+	}
 	
 	public PilhaOperador (int tam)
 	{
