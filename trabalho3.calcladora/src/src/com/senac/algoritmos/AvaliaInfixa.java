@@ -70,7 +70,6 @@ public class AvaliaInfixa {
     						pilha.push(teste.charAt(0));
     					}
     				}
-    			//prioridade(teste.charAt(0));
     			}
     		}
         }
