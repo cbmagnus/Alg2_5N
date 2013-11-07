@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import src.com.senac.algoritmos.AvaliadorRPN;
 import src.com.senac.estruturas.PilhaCheia;
+import src.com.senac.estruturas.PilhaInfixa;
 import src.com.senac.estruturas.PilhaOperador;
 import src.com.senac.estruturas.PilhaVazia;
 
@@ -14,60 +15,60 @@ public class AvaliaInfixa {
 	
 	public static String avaliaInfixa (String expressao) throws PilhaCheia, PilhaVazia, InvalidOperator
     {
-    	PilhaOperador pilha = new PilhaOperador(50);
+    	PilhaInfixa pilha = new PilhaInfixa(50);
     	
     	Scanner sc = new Scanner(expressao);
-    	
+    	imprime = null;
     	while (sc.hasNext()) {
     		if (sc.hasNextInt()) {
     			if(imprime == null){
-    				imprime = ("" + sc.nextInt());
-    			}else{
-    				imprime += (" " + sc.nextInt());
-    			}
+        			imprime = sc.nextInt() + " ";
+        		}
+    			else{
+    			imprime += sc.nextInt() + " ";
+        		}
     		} 
     		
     		else {
-    			String teste = sc.next();
-    			
-    			if(teste.charAt(0) == ')'){
-    				while((char)pilha.peek() != '('){
-    					imprime += " " + (char)pilha.pop();
+    			char teste = sc.next().charAt(0);
+    			if(teste == ')'){
+    				while(pilha.peek() != '('){
+    					imprime += pilha.pop() + " ";
     				}
     				pilha.pop();
     			}
     			
-    			else if(teste.charAt(0) == '('){
-    				pilha.push(teste.charAt(0));
+    			else if(teste == '('){
+    				pilha.push(teste);
     			}
     			
-    			else if((teste.charAt(0) == '*') || (teste.charAt(0) == '/') || (teste.charAt(0) == '+') || (teste.charAt(0) == '-')){
+    			else if((teste == '*') || (teste == '/') || (teste == '+') || (teste == '-')){
     				if(pilha.getTopo() -1 == -1 ){
-    					pilha.push(teste.charAt(0));
+    					pilha.push(teste);
     					
     				}else{
-    					if(prioridade(teste.charAt(0)) >= prioridade((char)pilha.peek()) || (char)pilha.peek() == '('){
-    						pilha.push(teste.charAt(0));
+    					if(prioridade(teste) >= prioridade(pilha.peek()) || pilha.peek() == '('){
+    						pilha.push(teste);
     					}
     					else{
     						while(pilha.getTopo()-1 != -1){
-    							if ( ((char)pilha.peek() == '(') && (teste.charAt(0) == '(') ){
+    							if ( (pilha.peek() == '(') && (teste == '(') ){
     								pilha.pop();
     								break;
     							}
-    							else if( prioridade(teste.charAt(0)) == prioridade((char)pilha.peek()) ){
+    							else if( prioridade(teste) == prioridade(pilha.peek()) ){
     								break;
     							}
     							
-    							else if(prioridade(teste.charAt(0)) <= prioridade((char)pilha.peek()) ){
-    								if((char)pilha.peek() == '('){
+    							else if(prioridade(teste) <= prioridade(pilha.peek()) ){
+    								if(pilha.peek() == '('){
     									;
     									break;
     								}
-    								imprime += " " + (char)pilha.pop();
+    								imprime += pilha.pop() + " ";
     							}
     						}
-    						pilha.push(teste.charAt(0));
+    						pilha.push(teste);
     					}
     				}
     			}
@@ -75,11 +76,11 @@ public class AvaliaInfixa {
         }
          
     	while(pilha.getTopo() != 0){
-    		imprime += " " + (char)pilha.pop();
+    		imprime += pilha.pop() + " ";
     	}
     	
     	saida = AvaliadorRPN.avalia(imprime);
-    	imp();
+    	System.out.println("resultado posfixa: " + imprime);
         return imprime = "resultado final: " + saida;
 }
 	
@@ -99,11 +100,7 @@ private static char prioridade (char op) throws InvalidOperator
 		return 1;
 	}
 		
-	throw new InvalidOperator(op);
+	throw new InvalidOperator((char)op);
 }
-
-	private static void imp(){
-		System.out.println("resultado posfixa: " + imprime);
-	}
 
 }
